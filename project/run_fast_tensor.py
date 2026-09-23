@@ -1,4 +1,5 @@
 import random
+import time
 
 import numba
 
@@ -77,6 +78,8 @@ class FastTrain:
             random.shuffle(c)
             X_shuf, y_shuf = zip(*c)
 
+            t0 = time.time()
+
             for i in range(0, len(X_shuf), BATCH):
                 optim.zero_grad()
                 X = minitorch.tensor(X_shuf[i : i + BATCH], backend=self.backend)
@@ -93,6 +96,8 @@ class FastTrain:
                 # Update
                 optim.step()
 
+            elapsed = time.time() - t0
+
             losses.append(total_loss)
             # Logging
             if epoch % 10 == 0 or epoch == max_epochs:
@@ -102,6 +107,7 @@ class FastTrain:
                 y2 = minitorch.tensor(data.y)
                 correct = int(((out.detach() > 0.5) == y2).sum()[0])
                 log_fn(epoch, total_loss, correct, losses)
+                print(f"  time/epoch: {elapsed}s")
 
 
 if __name__ == "__main__":
@@ -111,6 +117,7 @@ if __name__ == "__main__":
     parser.add_argument("--PTS", type=int, default=50, help="number of points")
     parser.add_argument("--HIDDEN", type=int, default=10, help="number of hiddens")
     parser.add_argument("--RATE", type=float, default=0.05, help="learning rate")
+    parser.add_argument("--EPOCHS", type=int, default=500, help="number of epochs")
     parser.add_argument("--BACKEND", default="cpu", help="backend mode")
     parser.add_argument("--DATASET", default="simple", help="dataset")
     parser.add_argument("--PLOT", default=False, help="dataset")
@@ -122,13 +129,19 @@ if __name__ == "__main__":
     if args.DATASET == "xor":
         data = minitorch.datasets["Xor"](PTS)
     elif args.DATASET == "simple":
-        data = minitorch.datasets["Simple"].simple(PTS)
+        data = minitorch.datasets["Simple"](PTS)
     elif args.DATASET == "split":
         data = minitorch.datasets["Split"](PTS)
+    elif args.DATASET == "diag":
+        data = minitorch.datasets["Diag"](PTS)
+    elif args.DATASET == "circle":
+        data = minitorch.datasets["Circle"](PTS)
+    elif args.DATASET == "spiral":
+        data = minitorch.datasets["Spiral"](PTS)
 
     HIDDEN = int(args.HIDDEN)
     RATE = args.RATE
 
     FastTrain(
         HIDDEN, backend=FastTensorBackend if args.BACKEND != "gpu" else GPUBackend
-    ).train(data, RATE)
+    ).train(data, RATE, max_epochs=args.EPOCHS)

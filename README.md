@@ -295,3 +295,177 @@ Epoch  400  loss  8.080 correct 48
 Epoch  500  loss  7.715 correct 48
   time/epoch: 0.046s
 ```
+
+---
+
+# Module 3: Efficiency improvements
+
+50 points, 100 epochs
+
+## Simple dataset
+
+### CPU
+
+Training log
+
+```text
+Epoch  0  loss  5.2378367938354025 correct 45
+  time/epoch: 27.471797227859497s
+Epoch  10  loss  1.9905409674358292 correct 50
+  time/epoch: 0.03902745246887207s
+Epoch  20  loss  0.722818691925663 correct 47
+  time/epoch: 0.03612923622131348s
+Epoch  30  loss  1.0443822858111493 correct 50
+  time/epoch: 0.038548946380615234s
+Epoch  40  loss  0.7241019724698469 correct 50
+  time/epoch: 0.037558555603027344s
+Epoch  50  loss  0.37141934423989464 correct 49
+  time/epoch: 0.035471200942993164s
+Epoch  60  loss  0.13802424549369116 correct 50
+  time/epoch: 0.0354611873626709s
+Epoch  70  loss  0.47752179562409536 correct 50
+  time/epoch: 0.03502082824707031s
+Epoch  80  loss  0.674895118218075 correct 49
+  time/epoch: 0.035843610763549805s
+Epoch  90  loss  1.071454385851866 correct 50
+  time/epoch: 0.04048871994018555s
+```
+
+### GPU
+
+Training log
+
+```text
+Epoch  0  loss  4.812581733379714 correct 43
+  time/epoch: 3.088108539581299s
+Epoch  10  loss  2.389976357072972 correct 48
+  time/epoch: 0.779613733291626s
+Epoch  20  loss  0.9223367229193951 correct 50
+  time/epoch: 0.7920539379119873s
+Epoch  30  loss  0.6132368148252241 correct 50
+  time/epoch: 0.8692193031311035s
+Epoch  40  loss  0.8443921180747713 correct 50
+  time/epoch: 0.8171367645263672s
+Epoch  50  loss  0.539672228722854 correct 50
+  time/epoch: 0.8156919479370117s
+Epoch  60  loss  0.15151644235204018 correct 50
+  time/epoch: 0.7995297908782959s
+Epoch  70  loss  0.056512087144279514 correct 50
+  time/epoch: 0.8019511699676514s
+Epoch  80  loss  0.057348705259877446 correct 50
+  time/epoch: 0.8916285037994385s
+Epoch  90  loss  0.023220764502509192 correct 50
+  time/epoch: 0.7820770740509033s
+```
+
+## Diag dataset
+
+### CPU
+
+Training log
+
+```text
+Epoch  0  loss  2.4503356163499106 correct 45
+  time/epoch: 12.99582028388977s
+Epoch  10  loss  0.3671714983000165 correct 49
+  time/epoch: 0.035866737365722656s
+Epoch  20  loss  0.20580124582483678 correct 49
+  time/epoch: 0.03166317939758301s
+Epoch  30  loss  0.25237600190572596 correct 50
+  time/epoch: 0.03523445129394531s
+Epoch  40  loss  0.6408666372827683 correct 49
+  time/epoch: 0.03250241279602051s
+Epoch  50  loss  0.8882572223671452 correct 50
+  time/epoch: 0.033388614654541016s
+Epoch  60  loss  0.27522472761321054 correct 50
+  time/epoch: 0.03245830535888672s
+Epoch  70  loss  0.008294527807608074 correct 50
+  time/epoch: 0.03218579292297363s
+Epoch  80  loss  0.39712606631161157 correct 50
+  time/epoch: 0.03325295448303223s
+Epoch  90  loss  0.04743764476427284 correct 50
+  time/epoch: 0.03372812271118164s
+```
+
+### GPU
+
+Training log
+
+```text
+Epoch  0  loss  3.7089225770856675 correct 41
+  time/epoch: 3.005887508392334s
+Epoch  10  loss  1.2949402216750312 correct 46
+  time/epoch: 0.8675622940063477s
+Epoch  20  loss  1.700008636550403 correct 49
+  time/epoch: 0.8622338771820068s
+Epoch  30  loss  1.1153664159054668 correct 49
+  time/epoch: 0.9243922233581543s
+Epoch  40  loss  1.8908194807473857 correct 49
+  time/epoch: 0.8204624652862549s
+Epoch  50  loss  0.903663283152395 correct 49
+  time/epoch: 0.8425130844116211s
+Epoch  60  loss  0.5759804551869384 correct 49
+  time/epoch: 0.8052170276641846s
+Epoch  70  loss  0.5469167552666898 correct 50
+  time/epoch: 0.810882568359375s
+Epoch  80  loss  1.1383499239403978 correct 50
+  time/epoch: 0.9820647239685059s
+Epoch  90  loss  0.9168228366295759 correct 50
+  time/epoch: 0.8681612014770508s
+```
+
+## Split dataset
+
+### CPU
+
+Training log
+
+```text
+Epoch  0  loss  8.585140801859719 correct 29
+  time/epoch: 27.868874073028564s
+Epoch  10  loss  5.829099953145586 correct 36
+  time/epoch: 0.033423662185668945s
+Epoch  20  loss  5.131371755476135 correct 43
+  time/epoch: 0.03310799598693848s
+Epoch  30  loss  3.7912860330442473 correct 43
+  time/epoch: 0.03279924392700195s
+Epoch  40  loss  3.062014013845069 correct 45
+  time/epoch: 0.04085969924926758s
+Epoch  50  loss  4.6817390185586545 correct 46
+  time/epoch: 0.03735065460205078s
+Epoch  60  loss  2.7666305564720233 correct 48
+  time/epoch: 0.03743100166320801s
+Epoch  70  loss  1.572545257994916 correct 48
+  time/epoch: 0.034235239028930664s
+Epoch  80  loss  0.6889887890964899 correct 48
+  time/epoch: 0.03398728370666504s
+Epoch  90  loss  2.861258392248888 correct 48
+  time/epoch: 0.033847808837890625s
+```
+
+### GPU
+
+Training log
+
+```text
+Epoch  0  loss  4.9268867608509055 correct 31
+  time/epoch: 3.2422914505004883s
+Epoch  10  loss  9.377686772383592 correct 32
+  time/epoch: 0.9014341831207275s
+Epoch  20  loss  5.553370451407149 correct 41
+  time/epoch: 0.9138057231903076s
+Epoch  30  loss  4.367019065017009 correct 40
+  time/epoch: 0.9994316101074219s
+Epoch  40  loss  4.232833231771651 correct 48
+  time/epoch: 0.857952356338501s
+Epoch  50  loss  3.0817162287551536 correct 43
+  time/epoch: 0.8517899513244629s
+Epoch  60  loss  3.6305963288925187 correct 47
+  time/epoch: 0.8609640598297119s
+Epoch  70  loss  2.168981859256876 correct 48
+  time/epoch: 0.8998012542724609s
+Epoch  80  loss  1.9577700413579848 correct 50
+  time/epoch: 0.9080259799957275s
+Epoch  90  loss  2.1490025820297163 correct 48
+  time/epoch: 0.8182260990142822s
+```
